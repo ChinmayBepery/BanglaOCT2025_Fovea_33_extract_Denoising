@@ -1,5 +1,0 @@
-Patient ID,Ground Truth Class,GT_ID,Noisy Prediction,Noisy Pred ID,Noisy Correct,Clean Prediction,Clean Pred ID,Clean Correct,Changed Correctness?,Slices_Noise,Slices_Clean,Noisy_Path,Clean_Path
-110719RNIO_SOTON_L,DryAMD,0,DryAMD,0,1,DryAMD,0,1,No Change,33,33,33_Extracted_OCT_data\DryAMD\110719RNIO_SOTON_L,33_Extracted_OCT_data_denoised\DryAMD\110719RNIO_SOTON_L
-108468RNIO_KAMAL HOSSAIN_L,WetAMD,1,DryAMD,0,0,WetAMD,1,1,0 → 1 (Improved),33,33,33_Extracted_OCT_data\WetAMD\108468RNIO_KAMAL HOSSAIN_L,33_Extracted_OCT_data_denoised\WetAMD\108468RNIO_KAMAL HOSSAIN_L
-10632RNIO_HARUN OR RASHID_R,NonAMD,2,DryAMD,0,0,NonAMD,2,1,0 → 1 (Improved),33,33,33_Extracted_OCT_data\NonAMD\10632RNIO_HARUN OR RASHID_R,33_Extracted_OCT_data_denoised\NonAMD\10632RNIO_HARUN OR RASHID_R
-10645RNIO_RAKIBUL ISLAM_L,NonAMD,2,NonAMD,2,1,NonAMD,2,1,No Change,33,33,33_Extracted_OCT_data\NonAMD\10645RNIO_RAKIBUL ISLAM_L,33_Extracted_OCT_data_denoised\NonAMD\10645RNIO_RAKIBUL ISLAM_L
