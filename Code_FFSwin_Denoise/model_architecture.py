@@ -121,30 +121,3 @@ class OCT3DDenoisingAutoencoder(nn.Module):
         return self.sigmoid(x)
 
 # ==========================================
-# 3. FFSWIN CLASSIFIER (Used for Training/Eval)
-# ==========================================
-class FFSwinClassifier(nn.Module):
-    def __init__(self, num_classes=3, in_chans=1, embed_dim=96, patch_size=4):
-        super().__init__()
-        self.patch_embed = nn.Conv3d(in_chans, embed_dim, kernel_size=(1, patch_size, patch_size), stride=(1, patch_size, patch_size))
-        
-        # Deep Swin Backbone (Flip-Flop Architecture)
-        self.layers = nn.Sequential(
-            SwinTransformerBlock3D(embed_dim, num_heads=3, shift_size=(0,0,0)), # Flop
-            SwinTransformerBlock3D(embed_dim, num_heads=3, shift_size=(1,2,2)), # Flip
-            SwinTransformerBlock3D(embed_dim, num_heads=3, shift_size=(0,0,0)), # Flop
-            SwinTransformerBlock3D(embed_dim, num_heads=3, shift_size=(1,2,2))  # Flip
-        )
-        self.norm = nn.LayerNorm(embed_dim)
-        self.avgpool = nn.AdaptiveAvgPool1d(1)
-        self.head = nn.Linear(embed_dim, num_classes)
-
-    def forward(self, x):
-        x = self.patch_embed(x).permute(0, 2, 3, 4, 1) # (B, D, H, W, C)
-        x = self.layers(x)
-        x = self.norm(x)
-        # Global Average Pooling over Depth, Height, Width
-        B, D, H, W, C = x.shape
-        x = x.view(B, -1, C).transpose(1, 2) # (B, C, N)
-        x = self.avgpool(x).flatten(1)       # (B, C)
-        return self.head(x)
